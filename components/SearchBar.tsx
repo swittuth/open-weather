@@ -5,11 +5,11 @@ const SearchBar = () => {
   const [expand, setExpand] = useState(false);
 
   return (
-    <div className='w-[500px] bg-black'>
-      <form className='flex gap-1 items-center border-2 rounded-full p-2 w-10 h-10 focus-within:w-full'>
+    <div className='w-[500px]'>
+      <form className='flex items-center justify-center border-2 p-2 rounded-full w-10 h-10 focus-within:w-full transition-all duration-150'>
         <input
           type='text'
-          className='outline-0 w-full'
+          className='outline-0 w-full relative bg-transparent'
           placeholder='Enter location'
         />
         <button
