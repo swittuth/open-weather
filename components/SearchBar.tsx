@@ -1,9 +1,6 @@
 import { FaSearchLocation } from 'react-icons/fa';
-import { useState } from 'react';
 
 const SearchBar = () => {
-  const [expand, setExpand] = useState(false);
-
   return (
     <div className='w-0 focus-within:w-[500px] transition-all duration-150'>
       <form className='flex items-center justify-center border-2 p-1 rounded-full w-11 h-11 focus-within:w-full transition-all duration-150'>
