@@ -1,13 +1,17 @@
 import SearchBar from './SearchBar';
+import Logo from './Logo';
 
 const NavBar = () => {
   return (
-    <nav className='flex border-2 p-5'>
-      <div>
-        <p>Logo</p>
-      </div>
-      <SearchBar />
-    </nav>
+    <div className='w-full flex border-2 justify-center'>
+      <nav className='flex p-5 justify-between items-center max-w-7xl w-full'>
+        <div>
+          <Logo />
+        </div>
+        <SearchBar />
+        <div>Placeholder</div>
+      </nav>
+    </div>
   );
 };
 
