@@ -8,6 +8,10 @@ const SearchBar = () => {
           type='text'
           className='outline-0 w-full relative bg-transparent'
           placeholder='Enter location'
+          aria-label='location-text-input'
+          autoComplete='false'
+          autoCapitalize='false'
+          autoFocus
         />
         <button
           className='bg-slate-200 p-2 w-8 h-8 rounded-full hover:bg-slate-300 transition-colors duration-150 border-0 relative'
