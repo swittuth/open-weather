@@ -2,9 +2,7 @@ import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import NavBar from '../components/NavBar';
 
-const inter = Inter({ subsets: ['latin'] });
-
-const api =
+const api: string =
   'http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=46851850e98217dd4c7f75597b6dc9dd';
 
 export default function Home() {
@@ -16,7 +14,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Weather API</title>
+        <title>WeatherUp</title>
+        <link rel='shortcut icon' href='../public/weatherup_logo.ico' />
       </Head>
       <header>
         <NavBar />
