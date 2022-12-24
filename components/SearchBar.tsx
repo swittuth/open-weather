@@ -17,9 +17,7 @@ const SearchBar = () => {
   const { nameCtx } = useContext(AppContext);
   const { data, error } = useSWR('/api/countriesdata', fetcher);
   const [recommendation, setRecommendation] = useState([]);
-
   if (error) return <div>Unable to load backend data</div>;
-
   const handleRecommendation = (event: SyntheticEvent) => {
     const result = JSON.parse(data).filter(
       (obj: CountriesDataType) =>
@@ -27,7 +25,6 @@ const SearchBar = () => {
     );
     setRecommendation((recs) => [...result]);
   };
-
   const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
 
   return (
@@ -50,6 +47,7 @@ const SearchBar = () => {
           <FaSearchLocation />
         </button>
       </form>
+      <InputRecommendation recommendation={recommendation} />
     </div>
   );
 };
