@@ -19,6 +19,10 @@ const SearchBar = () => {
   const [recommendation, setRecommendation] = useState([]);
   if (error) return <div>Unable to load backend data</div>;
   const handleRecommendation = (event: SyntheticEvent) => {
+    if (event.target.value === '') {
+      setRecommendation((recs) => []);
+      return;
+    }
     const result = JSON.parse(data).filter(
       (obj: CountriesDataType) =>
         obj.name.toLowerCase().indexOf(event.target.value.toLowerCase()) === 0
