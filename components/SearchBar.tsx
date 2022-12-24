@@ -1,9 +1,34 @@
 import { FaSearchLocation } from 'react-icons/fa';
-import { useContext } from 'react';
+import { SyntheticEvent, useContext, useState } from 'react';
+import InputRecommendation from './InputRecommendation';
+import _debounce from 'lodash/debounce';
 import AppContext from './context/state';
+import useSWR from 'swr';
+import debounce from 'lodash/debounce';
+
+const fetcher = (url: 'string') => fetch(url).then((res) => res.json());
+
+type CountriesDataType = {
+  name: string;
+  code: string;
+};
 
 const SearchBar = () => {
   const { nameCtx } = useContext(AppContext);
+  const { data, error } = useSWR('/api/countriesdata', fetcher);
+  const [recommendation, setRecommendation] = useState([]);
+
+  if (error) return <div>Unable to load backend data</div>;
+
+  const handleRecommendation = (event: SyntheticEvent) => {
+    const result = JSON.parse(data).filter(
+      (obj: CountriesDataType) =>
+        obj.name.toLowerCase().indexOf(event.target.value.toLowerCase()) === 0
+    );
+    setRecommendation((recs) => [...result]);
+  };
+
+  const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
 
   return (
     <div className='w-0 focus-within:w-[500px] transition-all duration-150'>
@@ -12,6 +37,7 @@ const SearchBar = () => {
           type='text'
           className='outline-0 w-full relative bg-transparent'
           placeholder='Enter location'
+          onChange={debounceHandleRecommendation}
           aria-label='location-text-input'
           autoComplete='false'
           autoCapitalize='false'
