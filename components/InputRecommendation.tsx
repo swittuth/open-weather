@@ -1,7 +1,11 @@
 const InputRecommendation = ({ recommendation }) => {
   return (
     <>
-      <ul></ul>
+      <ul className='bg-slate-400 absolute w-full'>
+        {recommendation.map((obj: { name: string; code: string }) => (
+          <li key={crypto.randomUUID()}>{obj.name}</li>
+        ))}
+      </ul>
     </>
   );
 };
