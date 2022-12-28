@@ -51,7 +51,9 @@ const SearchBar = () => {
           <FaSearchLocation />
         </button>
       </form>
-      <InputRecommendation recommendation={recommendation} />
+      <div className='relative'>
+        <InputRecommendation recommendation={recommendation} />
+      </div>
     </div>
   );
 };
