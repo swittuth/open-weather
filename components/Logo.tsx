@@ -2,7 +2,7 @@ import Image from 'next/image';
 import logoSvg from '../public/weatherup_logo.png';
 
 const Logo = () => {
-  return <Image width={80} alt='WeatherUp logo' src={logoSvg} />;
+  return <h1>WeatherUp</h1>;
 };
 
 export default Logo;

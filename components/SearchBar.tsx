@@ -4,8 +4,6 @@ import InputRecommendation from './InputRecommendation';
 import _debounce from 'lodash/debounce';
 import AppContext from './context/state';
 import useSWR from 'swr';
-import debounce from 'lodash/debounce';
-
 const fetcher = (url: 'string') => fetch(url).then((res) => res.json());
 
 type CountriesDataType = {
@@ -14,7 +12,6 @@ type CountriesDataType = {
 };
 
 const SearchBar = () => {
-  const { nameCtx } = useContext(AppContext);
   const { data, error } = useSWR('/api/countriesdata', fetcher);
   const [recommendation, setRecommendation] = useState([]);
   if (error) return <div>Unable to load backend data</div>;
