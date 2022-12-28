@@ -13,9 +13,11 @@ type CountriesDataType = {
 
 const SearchBar = () => {
   const { data, error } = useSWR('/api/countriesdata', fetcher);
+  const { searchValue, setSearchValue } = useContext(AppContext);
   const [recommendation, setRecommendation] = useState([]);
   if (error) return <div>Unable to load backend data</div>;
   const handleRecommendation = (event: SyntheticEvent) => {
+    setSearchValue(event.target.value);
     if (event.target.value === '') {
       setRecommendation((recs) => []);
       return;
