@@ -16,8 +16,12 @@ const SearchBar = () => {
   const { searchValue, setSearchValue } = useContext(AppContext);
   const [recommendation, setRecommendation] = useState([]);
   if (error) return <div>Unable to load backend data</div>;
-  const handleRecommendation = (event: SyntheticEvent) => {
+  const handleSearchValue = (event: SyntheticEvent) => {
     setSearchValue(event.target.value);
+    debounceHandleRecommendation(event);
+  };
+
+  const handleRecommendation = (event: SyntheticEvent) => {
     if (event.target.value === '') {
       setRecommendation((recs) => []);
       return;
@@ -32,12 +36,13 @@ const SearchBar = () => {
 
   return (
     <div className='w-0 focus-within:w-[500px] transition-all duration-150'>
-      <form className='flex items-center justify-center border-2 p-2 rounded-full w-11 h-11 focus-within:w-full transition-all duration-150'>
+      <form className='flex items-center justify-center border-2 p-2 rounded-full w-11 h-11 focus-within:w-full transition-all duration-150 [&>input]'>
         <input
           type='text'
           className='outline-0 w-full relative bg-transparent'
           placeholder='Enter location'
-          onChange={debounceHandleRecommendation}
+          onChange={handleSearchValue}
+          value={searchValue}
           aria-label='location-text-input'
           autoComplete='false'
           autoCapitalize='false'
@@ -51,7 +56,10 @@ const SearchBar = () => {
         </button>
       </form>
       <div className='relative'>
-        <InputRecommendation recommendation={recommendation} />
+        <InputRecommendation
+          recommendation={recommendation}
+          handleSearchValue={setSearchValue}
+        />
       </div>
     </div>
   );
