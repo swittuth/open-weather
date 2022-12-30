@@ -68,6 +68,7 @@ const SearchBar = () => {
         <InputRecommendation
           recommendation={recommendation}
           handleSearchValue={setSearchValue}
+          setRecommendation={setRecommendation}
         />
       </div>
     </div>
