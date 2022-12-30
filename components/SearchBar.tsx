@@ -19,7 +19,8 @@ type CountriesDataType = {
 
 const SearchBar = () => {
   const { data, error } = useSWR('/api/countriesdata', fetcher);
-  const { searchValue, setSearchValue } = useContext(AppContext);
+  const { searchValue, setSearchValue, currWeatherData, setCurrWeatherData } =
+    useContext(AppContext);
   const [recommendation, setRecommendation] = useState([]);
 
   if (error) return <div>Unable to load backend data</div>;
@@ -48,6 +49,7 @@ const SearchBar = () => {
       const data = await fetch(`${apiWeather}${searchValue}${apiKey}`).then(
         (data) => data.json()
       );
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
