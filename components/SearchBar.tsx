@@ -4,6 +4,7 @@ import InputRecommendation from './InputRecommendation';
 import _debounce from 'lodash/debounce';
 import AppContext from './context/state';
 import useSWR from 'swr';
+
 const fetcher = (url: 'string') => fetch(url).then((res) => res.json());
 
 type CountriesDataType = {
@@ -35,8 +36,16 @@ const SearchBar = () => {
   const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
 
   return (
-    <div className='w-0 focus-within:w-[500px] transition-all duration-150'>
-      <form className='flex items-center justify-center border-2 p-2 rounded-full w-11 h-11 focus-within:w-full transition-all duration-150 [&>input]'>
+    <div
+      className={`${
+        searchValue === '' ? 'w-0' : 'w-[500px]'
+      } focus-within:w-[500px] transition-all duration-150`}
+    >
+      <form
+        className={`${
+          searchValue === '' ? 'w-11' : 'w-full'
+        } h-11 flex items-center justify-center border-2 p-2 rounded-full focus-within:w-full transition-all duration-150`}
+      >
         <input
           type='text'
           className='outline-0 w-full relative bg-transparent'
