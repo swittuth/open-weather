@@ -5,7 +5,11 @@ import _debounce from 'lodash/debounce';
 import AppContext from './context/state';
 import useSWR from 'swr';
 
+// fetch countries data
 const fetcher = (url: 'string') => fetch(url).then((res) => res.json());
+
+const apiKey = '&appid=46851850e98217dd4c7f75597b6dc9dd';
+const apiWeather: string = 'https://api.openweathermap.org/data/2.5/weather?q=';
 
 type CountriesDataType = {
   name: string;
@@ -16,7 +20,9 @@ const SearchBar = () => {
   const { data, error } = useSWR('/api/countriesdata', fetcher);
   const { searchValue, setSearchValue } = useContext(AppContext);
   const [recommendation, setRecommendation] = useState([]);
+
   if (error) return <div>Unable to load backend data</div>;
+
   const handleSearchValue = (event: SyntheticEvent) => {
     setSearchValue(event.target.value);
     debounceHandleRecommendation(event);
@@ -34,6 +40,17 @@ const SearchBar = () => {
     setRecommendation((recs) => [...result]);
   };
   const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
+
+  const handleSubmit = async () => {
+    try {
+      const data = await fetch(`${apiWeather}${searchValue}${apiKey}`).then(
+        (data) => data.json()
+      );
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div
@@ -60,6 +77,8 @@ const SearchBar = () => {
         <button
           className='bg-slate-200 p-2 w-8 h-8 rounded-full hover:bg-slate-300 transition-colors duration-150 border-0 relative'
           aria-label='submit-search'
+          type='button'
+          onClick={handleSubmit}
         >
           <FaSearchLocation />
         </button>
