@@ -60,6 +60,10 @@ const SearchBar = () => {
         <button
           className='bg-slate-200 p-2 w-8 h-8 rounded-full hover:bg-slate-300 transition-colors duration-150 border-0 relative'
           aria-label='submit-search'
+          type='button'
+          onClick={() => {
+            console.log(searchValue);
+          }}
         >
           <FaSearchLocation />
         </button>
