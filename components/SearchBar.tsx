@@ -4,11 +4,12 @@ import InputRecommendation from './InputRecommendation';
 import _debounce from 'lodash/debounce';
 import AppContext from './context/state';
 import useSWR from 'swr';
+import moment from 'moment-timezone';
 
 // fetch countries data
 const fetcher = (url: 'string') => fetch(url).then((res) => res.json());
 
-const apiKey = '&appid=46851850e98217dd4c7f75597b6dc9dd';
+const apiKey = '&appid=46851850e98217dd4c7f75597b6dc9dd&units=imperial';
 const apiWeather: string = 'https://api.openweathermap.org/data/2.5/weather?q=';
 
 type CountriesDataType = {
@@ -18,7 +19,8 @@ type CountriesDataType = {
 
 const SearchBar = () => {
   const { data, error } = useSWR('/api/countriesdata', fetcher);
-  const { searchValue, setSearchValue } = useContext(AppContext);
+  const { searchValue, setSearchValue, currWeatherData, setCurrWeatherData } =
+    useContext(AppContext);
   const [recommendation, setRecommendation] = useState([]);
 
   if (error) return <div>Unable to load backend data</div>;
@@ -42,6 +44,7 @@ const SearchBar = () => {
   const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
 
   const handleSubmit = async () => {
+    setSearchValue((value) => '');
     try {
       const data = await fetch(`${apiWeather}${searchValue}${apiKey}`).then(
         (data) => data.json()
