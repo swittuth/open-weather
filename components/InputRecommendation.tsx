@@ -3,7 +3,11 @@ type RecommendationType = {
   code: string;
 };
 
-const InputRecommendation = ({ recommendation, handleSearchValue }) => {
+const InputRecommendation = ({
+  recommendation,
+  handleSearchValue,
+  setRecommendation,
+}) => {
   return (
     <>
       <ul className='absolute w-full rounded-md bg-slate-50'>
@@ -13,6 +17,7 @@ const InputRecommendation = ({ recommendation, handleSearchValue }) => {
             key={crypto.randomUUID()}
             onClick={() => {
               handleSearchValue((name) => obj.name);
+              setRecommendation((recommendation) => []);
             }}
           >
             {obj.name}
