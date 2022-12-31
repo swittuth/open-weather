@@ -23,12 +23,15 @@ const SearchBar = () => {
   const { searchValue, setSearchValue, currWeatherData, setCurrWeatherData } =
     useContext(AppContext);
   const [recommendation, setRecommendation] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
 
   if (error) return <div>Unable to load backend data</div>;
 
   const handleSearchValue = (event: SyntheticEvent) => {
+    setIsTyping(true);
     setSearchValue(event.target.value);
     debounceHandleRecommendation(event);
+    setIsTyping(false);
   };
 
   const handleRecommendation = (event: SyntheticEvent) => {
@@ -99,14 +102,17 @@ const SearchBar = () => {
           </button>
         </form>
         <div className='relative'>
-          <InputRecommendation
-            recommendation={recommendation}
-            handleSearchValue={setSearchValue}
-            setRecommendation={setRecommendation}
-          />
+          {isTyping ? (
+            <Loader />
+          ) : (
+            <InputRecommendation
+              recommendation={recommendation}
+              handleSearchValue={setSearchValue}
+              setRecommendation={setRecommendation}
+            />
+          )}
         </div>
       </div>
-      <Loader />
     </>
   );
 };
