@@ -5,7 +5,6 @@ import _debounce from 'lodash/debounce';
 import AppContext from './context/state';
 import useSWR from 'swr';
 import moment from 'moment-timezone';
-import Loader from './Loader';
 
 // fetch countries data
 const fetcher = (url: 'string') => fetch(url).then((res) => res.json());
