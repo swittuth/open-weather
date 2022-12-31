@@ -31,12 +31,12 @@ const SearchBar = () => {
     setIsTyping(true);
     setSearchValue(event.target.value);
     debounceHandleRecommendation(event);
-    setIsTyping(false);
   };
 
   const handleRecommendation = (event: SyntheticEvent) => {
     if (event.target.value === '') {
       setRecommendation((recs) => []);
+      setIsTyping(false);
       return;
     }
     const result = JSON.parse(data).filter(
@@ -44,6 +44,7 @@ const SearchBar = () => {
         obj.name.toLowerCase().indexOf(event.target.value.toLowerCase()) === 0
     );
     setRecommendation((recs) => [...result]);
+    setIsTyping(false);
   };
   const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
 
@@ -102,15 +103,12 @@ const SearchBar = () => {
           </button>
         </form>
         <div className='relative'>
-          {isTyping ? (
-            <Loader />
-          ) : (
-            <InputRecommendation
-              recommendation={recommendation}
-              handleSearchValue={setSearchValue}
-              setRecommendation={setRecommendation}
-            />
-          )}
+          <InputRecommendation
+            recommendation={recommendation}
+            handleSearchValue={setSearchValue}
+            setRecommendation={setRecommendation}
+            isTyping={isTyping}
+          />
         </div>
       </div>
     </>
