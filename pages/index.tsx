@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import NavBar from '../components/NavBar';
+import WeatherContainer from '../components/WeatherComps/WeatherContainer';
 
 export default function Home() {
   return (
@@ -11,7 +12,9 @@ export default function Home() {
       <header>
         <NavBar />
       </header>
-      <main></main>
+      <main>
+        <WeatherContainer />
+      </main>
     </>
   );
 }
