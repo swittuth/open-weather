@@ -1,3 +1,5 @@
+import Loader from './Loader';
+
 type RecommendationType = {
   name: string;
   code: string;
