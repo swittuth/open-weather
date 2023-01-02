@@ -12,7 +12,7 @@ export default function Home() {
       <header>
         <NavBar />
       </header>
-      <main>
+      <main className='h-full'>
         <WeatherContainer />
       </main>
     </>
