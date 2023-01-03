@@ -27,9 +27,17 @@ const WeatherCard = () => {
     if (desc_arr.length === 1) {
       const noun = desc_arr[0];
       if (noun === 'rain') {
+        if (isAM) {
+          setImageWeather('partly-cloudy-day-rain.svg');
+        } else {
+          setImageWeather('patly-cloudy-night-rain.svg');
+        }
       } else if (noun === 'snow') {
+        setImageWeather('snow.svg');
       } else if (noun === 'mist') {
+        setImageWeather('mist.svg');
       } else if (noun === 'thunderstorm') {
+        setImageWeather('thunderstorms.svg');
       }
     } else if (desc_arr.length === 2) {
       const [adj, noun] = desc_arr;
