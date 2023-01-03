@@ -9,10 +9,10 @@ export default function Home() {
         <title>WeatherUp</title>
         <link rel='shortcut icon' href='../public/weatherup_logo.ico' />
       </Head>
-      <header>
+      <header className='h-[8%]'>
         <NavBar />
       </header>
-      <main className='h-full'>
+      <main className='h-[92%]'>
         <WeatherContainer />
       </main>
     </>
