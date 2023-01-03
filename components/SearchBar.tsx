@@ -48,27 +48,29 @@ const SearchBar = () => {
   const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
 
   const handleSubmit = async () => {
-    setSearchValue((value) => '');
-    try {
-      const data = await fetch(`${apiWeather}${searchValue}${apiKey}`).then(
-        (data) => data.json()
-      );
-      const { timezone: timezoneOffset } = data;
-      const utcTime = Date.now();
-      const timezoneTime = new Date(utcTime + timezoneOffset * 1000);
-      setCurrWeatherData((currData) => {
-        return {
-          ...data.main,
-          name: data.name,
-          condition: data.weather[0].main,
-          condition_description: data.weather[0].description,
-          ...data.wind,
-          visibility: data.visibility,
-          time: timezoneTime,
-        };
-      });
-    } catch (error) {
-      console.error(error);
+    if (data) {
+      setSearchValue((value) => '');
+      try {
+        const data = await fetch(`${apiWeather}${searchValue}${apiKey}`).then(
+          (data) => data.json()
+        );
+        const { timezone: timezoneOffset } = data;
+        const utcTime = Date.now();
+        const timezoneTime = new Date(utcTime + timezoneOffset * 1000);
+        setCurrWeatherData((currData) => {
+          return {
+            ...data.main,
+            name: data.name,
+            condition: data.weather[0].main,
+            condition_description: data.weather[0].description,
+            ...data.wind,
+            visibility: data.visibility,
+            time: timezoneTime,
+          };
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
