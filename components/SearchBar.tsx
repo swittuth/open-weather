@@ -18,11 +18,11 @@ type CountriesDataType = {
 };
 
 const SearchBar = () => {
+  const [recommendation, setRecommendation] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
   const { data, error } = useSWR('/api/countriesdata', fetcher);
   const { searchValue, setSearchValue, currWeatherData, setCurrWeatherData } =
     useContext(AppContext);
-  const [recommendation, setRecommendation] = useState([]);
-  const [isTyping, setIsTyping] = useState(false);
 
   if (error) return <div>Unable to load backend data</div>;
 

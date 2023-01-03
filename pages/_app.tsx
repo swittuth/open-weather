@@ -6,6 +6,7 @@ import AppContext from '../components/context/state';
 export default function App({ Component, pageProps }: AppProps) {
   const [searchValue, setSearchValue] = useState('');
   const [currWeatherData, setCurrWeatherData] = useState({});
+  const [imageWeather, setImageWeather] = useState('');
 
   return (
     <AppContext.Provider
@@ -14,6 +15,8 @@ export default function App({ Component, pageProps }: AppProps) {
         setSearchValue,
         currWeatherData,
         setCurrWeatherData,
+        imageWeather,
+        setImageWeather,
       }}
     >
       <Component {...pageProps} />
