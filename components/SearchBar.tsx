@@ -53,6 +53,9 @@ const SearchBar = () => {
       const data = await fetch(`${apiWeather}${searchValue}${apiKey}`).then(
         (data) => data.json()
       );
+      const { timezone: timezoneOffset } = data;
+      const utcTime = Date.now();
+      const timezoneTime = new Date(utcTime + timezoneOffset * 1000);
       setCurrWeatherData((currData) => {
         return {
           ...data.main,
@@ -61,9 +64,9 @@ const SearchBar = () => {
           condition_description: data.weather[0].description,
           ...data.wind,
           visibility: data.visibility,
+          time: timezoneTime,
         };
       });
-      console.log(currWeatherData);
     } catch (error) {
       console.error(error);
     }
