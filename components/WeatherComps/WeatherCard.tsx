@@ -3,6 +3,19 @@ import AppContext from '../context/state';
 import Image from 'next/image';
 import moment from 'moment';
 
+const mistWeather = new Set([
+  'mist',
+  'Smoke',
+  'Haze',
+  'sand/ dust whirls',
+  'fog',
+  'sand',
+  'dust',
+  'volcanic ash',
+  'squalls',
+  'tornado',
+]);
+
 const WeatherCard = () => {
   const { currWeatherData, imageWeather, setImageWeather } =
     useContext(AppContext);
@@ -18,40 +31,67 @@ const WeatherCard = () => {
   } = currWeatherData;
 
   useEffect(() => {
-    // need to be able to detect weather condition in order to display svg
-    const desc_arr = condition_description.split(' ');
     const m = moment(time);
     const curr_time = m.format('hh:mm a').split(' ');
     const isAM = curr_time[1] === 'am' ? true : false;
+    const condition_lowercase = condition_description.toLowerCase();
 
-    if (desc_arr.length === 1) {
-      const noun = desc_arr[0];
-      if (noun === 'rain') {
-        if (isAM) {
-          setImageWeather('partly-cloudy-day-rain.svg');
-        } else {
-          setImageWeather('patly-cloudy-night-rain.svg');
-        }
-      } else if (noun === 'snow') {
-        setImageWeather('snow.svg');
-      } else if (noun === 'mist') {
-        setImageWeather('mist.svg');
-      } else if (noun === 'thunderstorm') {
-        setImageWeather('thunderstorms.svg');
+    if (condition_lowercase.includes('clear sky')) {
+      if (isAM) {
+        setImageWeather('clear-day.svg');
+      } else {
+        setImageWeather('clear-night.svg');
       }
-    } else if (desc_arr.length === 2) {
-      const [adj, noun] = desc_arr;
+    } else if (condition_lowercase.includes('thunderstorm')) {
+      setImageWeather('thunderstorms.svg');
+    } else if (condition_lowercase.includes('drizzle')) {
+      setImageWeather('drizzle.svg');
+    } else if (
+      condition_lowercase.includes('snow') ||
+      condition_lowercase.includes('freezing rain') ||
+      condition_lowercase.includes('sleet')
+    ) {
+      setImageWeather('snow.svg');
+    } else if (mistWeather.has(condition_description)) {
+      setImageWeather('mist.svg');
+    } else if (condition_lowercase.includes('shower rain')) {
+      setImageWeather('shower-rain.svg');
+    } else if (condition_lowercase.includes('rain')) {
+      if (isAM) {
+        setImageWeather('partly-cloudy-day-rain.svg');
+      } else {
+        setImageWeather('partly-cloudy-night-rain.svg');
+      }
+    } else if (condition_lowercase === 'few clouds') {
+      if (isAM) {
+        setImageWeather('partly-cloudy-day.svg');
+      } else {
+        setImageWeather('partly-cloudy-night.svg');
+      }
+    } else if (condition_lowercase === 'overcast clouds') {
+      setImageWeather('overcast-cloud.svg');
+    } else if (
+      condition_lowercase === 'scattered clouds' ||
+      condition_lowercase === 'broken clouds'
+    ) {
+      setImageWeather('cloudy.svg');
     }
+
+    // not ensured that the description will always have length of 2 or less
   }, [condition_description]);
 
   return (
     <div>
-      <Image
-        src='/weather_assets/mist.svg'
-        width='300'
-        height='300'
-        alt='Current Weather Condition Svg'
-      />
+      {imageWeather ? (
+        <Image
+          src={`/weather_assets/${imageWeather}`}
+          width='300'
+          height='300'
+          alt='Current Weather Condition Svg'
+        />
+      ) : (
+        <p>Enter a Location</p>
+      )}
     </div>
   );
 };
