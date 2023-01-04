@@ -48,7 +48,7 @@ const SearchBar = () => {
   const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
 
   const handleSubmit = async () => {
-    if (data) {
+    if (searchValue) {
       setSearchValue((value) => '');
       try {
         const data = await fetch(`${apiWeather}${searchValue}${apiKey}`).then(
