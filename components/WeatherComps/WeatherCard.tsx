@@ -18,16 +18,7 @@ const mistWeather = new Set([
 
 const WeatherCard = () => {
   const {
-    currWeatherData: {
-      condition_description = '',
-      feels_like,
-      name,
-      time = '',
-      temp_min,
-      temp_max,
-      humidity,
-      temp,
-    },
+    currWeatherData: { condition_description = '', time = '' },
     imageWeather,
     setImageWeather,
   } = useContext(AppContext);
