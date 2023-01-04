@@ -17,18 +17,20 @@ const mistWeather = new Set([
 ]);
 
 const WeatherCard = () => {
-  const { currWeatherData, imageWeather, setImageWeather } =
-    useContext(AppContext);
   const {
-    condition_description = '',
-    feels_like,
-    name,
-    time = '',
-    temp_min,
-    temp_max,
-    humidity,
-    temp,
-  } = currWeatherData;
+    currWeatherData: {
+      condition_description = '',
+      feels_like,
+      name,
+      time = '',
+      temp_min,
+      temp_max,
+      humidity,
+      temp,
+    },
+    imageWeather,
+    setImageWeather,
+  } = useContext(AppContext);
 
   useEffect(() => {
     const m = moment(time);
