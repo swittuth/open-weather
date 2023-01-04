@@ -4,13 +4,13 @@ import InputRecommendation from './InputRecommendation';
 import _debounce from 'lodash/debounce';
 import AppContext from './context/state';
 import useSWR from 'swr';
-import moment from 'moment-timezone';
 
 // fetch countries data
 const fetcher = (url: 'string') => fetch(url).then((res) => res.json());
 
 const apiKey = '&appid=46851850e98217dd4c7f75597b6dc9dd&units=imperial';
-const apiWeather: string = 'https://api.openweathermap.org/data/2.5/weather?q=';
+const apiGeo: string = 'https://api.openweathermap.org/data/2.5/weather?q=';
+const apiWeather = 'https://api.openweathermap.org/data/2.5/onecall?';
 
 type CountriesDataType = {
   name: string;
@@ -46,12 +46,11 @@ const SearchBar = () => {
     setIsTyping(false);
   };
   const debounceHandleRecommendation = _debounce(handleRecommendation, 1000);
-
   const handleSubmit = async () => {
     if (searchValue) {
       setSearchValue((value) => '');
       try {
-        const data = await fetch(`${apiWeather}${searchValue}${apiKey}`).then(
+        const data = await fetch(`${apiGeo}${searchValue}${apiKey}`).then(
           (data) => data.json()
         );
         const { timezone: timezoneOffset } = data;
@@ -68,6 +67,13 @@ const SearchBar = () => {
             time: timezoneTime,
           };
         });
+
+        const { lat, lon } = data.coord;
+        const weatherData = await fetch(
+          `${apiWeather}lat=${lat}&lon=${lon}${apiKey}`
+        ).then((data) => data.json());
+
+        console.log(weatherData);
       } catch (error) {
         console.error(error);
       }

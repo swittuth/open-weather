@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import AppContext from '../context/state';
 
 const WeatherInfoCard = () => {
-  const { currWeatherData } = useContext(AppContext);
-  const { feels_like, name, temp_min, temp_max, humidity, temp } =
-    currWeatherData;
+  const {
+    currWeatherData: { feels_like, temp_min, temp_max, humidity, temp },
+  } = useContext(AppContext);
 
   return (
     <div>
