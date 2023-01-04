@@ -1,5 +1,7 @@
 import WeatherCard from './WeatherCard';
 import WeatherInfoCard from './WeatherInfoCard';
+import LocationTags from './LocationTags';
+import LocationTitle from './LocationTitle';
 import { useContext } from 'react';
 import AppContext from '../context/state';
 import styles from './WeatherContainer.module.css';
@@ -9,9 +11,9 @@ const WeatherContainer = () => {
   const { name } = currWeatherData;
 
   return (
-    <div className={`w-full h-full ${styles.weatherContainer}`}>
-      <h1>Location Tags</h1>
-      <h1>{name}</h1>
+    <div className={styles.weatherContainer}>
+      <LocationTags />
+      <LocationTitle />
       <WeatherCard />
       <WeatherInfoCard />
     </div>
