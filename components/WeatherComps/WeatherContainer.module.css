@@ -1,0 +1,26 @@
+.weatherContainer {
+  display: grid;
+  grid-template-areas:
+    'tag'
+    'location-name'
+    'weather-condition-iamge'
+    'weather-info';
+  grid-template-rows: 1fr 1fr 3fr 5fr;
+  grid-template-columns: 1fr;
+}
+
+.tag {
+  grid-area: tag;
+}
+
+.locationName {
+  grid-area: location-name;
+}
+
+.weatherConditionImage {
+  grid-area: weather-condition-image;
+}
+
+.weatherInfo {
+  grid-area: weather-info;
+}
