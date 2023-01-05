@@ -8,8 +8,16 @@ const WeatherInfoCard = () => {
 
   return (
     <div className='border-2 border-red-200 w-full grid grid-cols-2'>
-      <p>1st column</p>
-      <p>2nd column</p>
+      <ul className='flex flex-col'>
+        <li className='flex-grow'>Temperature: {temp}</li>
+        <li className='flex-grow'>Feels like: {feels_like}</li>
+        <li className='flex-grow'>Temp Min: {temp_min}</li>
+        <li className='flex-grow'>Temp Max: {temp_max}</li>
+      </ul>
+      <ul className='flex flex-col'>
+        <li className='flex-grow'>Humidity: {humidity}</li>
+        <li className='flex-grow'>Wind Speed: {speed}</li>
+      </ul>
     </div>
   );
 };
