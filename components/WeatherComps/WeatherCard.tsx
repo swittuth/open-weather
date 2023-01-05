@@ -75,8 +75,8 @@ const WeatherCard = () => {
   }, [condition_description]);
 
   return (
-    <div className='flex border-2 justify-center'>
-      <div className='w-4/5 flex'>
+    <div className='grid border-2 grid-cols-2'>
+      <div className='w-full flex'>
         {imageWeather ? (
           <Image
             src={`/weather_assets/${imageWeather}`}
@@ -85,10 +85,10 @@ const WeatherCard = () => {
             alt='Current Weather Condition Svg'
           />
         ) : (
-          <p>Enter a Location</p>
+          <p className='w-full text-center'>Enter a Location</p>
         )}
-        <WeatherInfoCard />
       </div>
+      <WeatherInfoCard />
     </div>
   );
 };
