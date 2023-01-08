@@ -53,9 +53,15 @@ const SearchBar = () => {
         const data = await fetch(`${apiGeo}${searchValue}${apiKey}`).then(
           (data) => data.json()
         );
-        const { timezone: timezoneOffset } = data;
+        const { lat, lon } = data.coord;
+        // to get hourly and daily data
+        const weatherData = await fetch(
+          `${apiWeather}lat=${lat}&lon=${lon}${apiKey}`
+        ).then((data) => data.json());
+        const { timezone: timezoneOffset } = weatherData.current;
         const utcTime = Date.now();
         const timezoneTime = new Date(utcTime + timezoneOffset * 1000);
+
         setCurrWeatherData((currData) => {
           return {
             ...data.main,
@@ -65,15 +71,10 @@ const SearchBar = () => {
             ...data.wind,
             visibility: data.visibility,
             time: timezoneTime,
+            daily: weatherData.daily,
+            hourly: weatherData.hourly,
           };
         });
-
-        const { lat, lon } = data.coord;
-        const weatherData = await fetch(
-          `${apiWeather}lat=${lat}&lon=${lon}${apiKey}`
-        ).then((data) => data.json());
-
-        console.log(weatherData);
       } catch (error) {
         console.error(error);
       }

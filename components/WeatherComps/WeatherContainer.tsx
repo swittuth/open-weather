@@ -1,5 +1,6 @@
 import WeatherCard from './WeatherCard';
 import WeatherInfoCard from './WeatherInfoCard';
+import DailyForecastCard from './DailyForecastCard';
 import LocationTags from './LocationTags';
 import LocationTitle from './LocationTitle';
 import styles from './WeatherContainer.module.css';
@@ -10,7 +11,7 @@ const WeatherContainer = () => {
       <LocationTags />
       <LocationTitle />
       <WeatherCard />
-      <WeatherInfoCard />
+      <DailyForecastCard />
     </div>
   );
 };

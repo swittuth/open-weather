@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import WeatherInfoCard from './WeatherInfoCard';
 import AppContext from '../context/state';
 import Image from 'next/image';
 import moment from 'moment';
@@ -18,16 +19,7 @@ const mistWeather = new Set([
 
 const WeatherCard = () => {
   const {
-    currWeatherData: {
-      condition_description = '',
-      feels_like,
-      name,
-      time = '',
-      temp_min,
-      temp_max,
-      humidity,
-      temp,
-    },
+    currWeatherData: { condition_description = '', time = '' },
     imageWeather,
     setImageWeather,
   } = useContext(AppContext);
@@ -83,17 +75,20 @@ const WeatherCard = () => {
   }, [condition_description]);
 
   return (
-    <div>
-      {imageWeather ? (
-        <Image
-          src={`/weather_assets/${imageWeather}`}
-          width='300'
-          height='300'
-          alt='Current Weather Condition Svg'
-        />
-      ) : (
-        <p>Enter a Location</p>
-      )}
+    <div className='flex border-2 justify-center'>
+      <div className='w-4/5 flex'>
+        {imageWeather ? (
+          <Image
+            src={`/weather_assets/${imageWeather}`}
+            width='300'
+            height='300'
+            alt='Current Weather Condition Svg'
+          />
+        ) : (
+          <p>Enter a Location</p>
+        )}
+        <WeatherInfoCard />
+      </div>
     </div>
   );
 };
