@@ -16,6 +16,7 @@ const DailyForecastContainer = () => {
             key={uuid()}
             weather_condition={obj.weather.description}
             temperature={obj.temp.day}
+            time={obj.dt}
           />
         ))}
     </div>
