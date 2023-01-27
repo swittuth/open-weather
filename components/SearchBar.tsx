@@ -53,6 +53,7 @@ const SearchBar = () => {
         const data = await fetch(`${apiGeo}${searchValue}${apiKey}`).then(
           (data) => data.json()
         );
+        console.log('curr data', data);
         const { lat, lon } = data.coord;
         // to get hourly and daily data
         const weatherData = await fetch(
@@ -61,7 +62,7 @@ const SearchBar = () => {
         const { timezone: timezoneOffset } = weatherData.current;
         const utcTime = Date.now();
         const timezoneTime = new Date(utcTime + timezoneOffset * 1000);
-
+        console.log('curr data', data.weather[0].description);
         setCurrWeatherData((currData) => {
           return {
             ...data.main,

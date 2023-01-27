@@ -8,13 +8,15 @@ const DailyForecastContainer = () => {
     currWeatherData: { daily },
   } = useContext(AppContext);
 
+  console.log('container', daily);
+
   return (
     <div className='flex gap-1 m-1'>
       {daily &&
-        daily.map((obj) => (
+        daily.map((obj: any[]) => (
           <DailyForecastCard
             key={uuid()}
-            weather_condition={obj.weather.description}
+            weather_condition={obj.weather[0].description}
             temperature={obj.temp.day}
             time={obj.dt}
           />
