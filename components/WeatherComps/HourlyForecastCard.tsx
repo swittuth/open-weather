@@ -1,4 +1,4 @@
-const HourlyForecastCard = () => {
+const HourlyForecastCard = ({ key, condition_description, temp }) => {
   return (
     <div>
       <p>Hourly Forecast Card</p>

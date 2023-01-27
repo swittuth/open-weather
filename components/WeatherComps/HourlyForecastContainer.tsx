@@ -13,7 +13,11 @@ const HourlyForecastContainer = () => {
   return (
     <div className='border-2 h-[400px] min-h-min col-span-1 overflow-auto'>
       {hourly.map((obj) => (
-        <HourlyForecastCard key={uuid()} />
+        <HourlyForecastCard
+          key={uuid()}
+          condition_description={hourly.weather[0].description}
+          temp={hourly.temp}}
+        />
       ))}
     </div>
   );
