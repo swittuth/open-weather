@@ -4,7 +4,7 @@ import AppContext from '../context/state';
 import { toWeatherSvg } from '../../utility/utility_functions';
 import Image from 'next/image';
 
-const WeatherCard = () => {
+const CurrentWeatherCard = () => {
   const {
     currWeatherData: { condition_description = '', time = '' },
     imageWeather,
@@ -17,8 +17,8 @@ const WeatherCard = () => {
   }, [condition_description]);
 
   return (
-    <div className='w-full flex justify-center'>
-      <div className='w-4/5 grid grid-cols-2 border-2 rounded-xl max-w-2xl'>
+    <div className='w-full col-span-3 flex justify-center border-2'>
+      <div className='w-4/5 grid grid-cols-2 rounded-xl max-w-2xl'>
         {imageWeather ? (
           <Image
             src={`/weather_assets/${imageWeather}`}
@@ -38,4 +38,4 @@ const WeatherCard = () => {
   );
 };
 
-export default WeatherCard;
+export default CurrentWeatherCard;

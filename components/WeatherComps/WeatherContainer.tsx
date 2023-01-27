@@ -1,4 +1,4 @@
-import WeatherCard from './WeatherCard';
+import CurrentWeatherContainer from './CurrentWeatherContainer';
 import DailyForecastContainer from './DailyForecastContainer';
 import LocationTags from './LocationTags';
 import LocationTitle from './LocationTitle';
@@ -9,7 +9,7 @@ const WeatherContainer = () => {
     <div className={styles.weatherContainer}>
       <LocationTags />
       <LocationTitle />
-      <WeatherCard />
+      <CurrentWeatherContainer />
       <DailyForecastContainer />
     </div>
   );

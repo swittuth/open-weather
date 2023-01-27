@@ -62,7 +62,7 @@ const SearchBar = () => {
         const { timezone: timezoneOffset } = weatherData.current;
         const utcTime = Date.now();
         const timezoneTime = new Date(utcTime + timezoneOffset * 1000);
-        console.log('curr data', data.weather[0].description);
+        console.log('curr data', weatherData);
         setCurrWeatherData((currData) => {
           return {
             ...data.main,
