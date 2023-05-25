@@ -21,8 +21,13 @@ const SearchBar = () => {
   const [recommendation, setRecommendation] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const { data, error } = useSWR('/api/countriesdata', fetcher);
-  const { searchValue, setSearchValue, currWeatherData, setCurrWeatherData } =
-    useContext(AppContext);
+  const {
+    searchValue,
+    setSearchValue,
+    currWeatherData,
+    setCurrWeatherData,
+    setLoading,
+  } = useContext(AppContext);
 
   if (error) return <div>Unable to load backend data</div>;
 
@@ -50,6 +55,7 @@ const SearchBar = () => {
     if (searchValue) {
       setSearchValue((value) => '');
       try {
+        setLoading(true);
         const data = await fetch(`${apiGeo}${searchValue}${apiKey}`).then(
           (data) => data.json()
         );
@@ -78,6 +84,8 @@ const SearchBar = () => {
         });
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
   };

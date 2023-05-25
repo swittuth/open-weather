@@ -7,6 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [searchValue, setSearchValue] = useState('');
   const [currWeatherData, setCurrWeatherData] = useState({});
   const [imageWeather, setImageWeather] = useState('');
+  const [loading, setLoading] = useState(false);
 
   return (
     <AppContext.Provider
@@ -17,6 +18,8 @@ export default function App({ Component, pageProps }: AppProps) {
         setCurrWeatherData,
         imageWeather,
         setImageWeather,
+        loading,
+        setLoading,
       }}
     >
       <Component {...pageProps} />
